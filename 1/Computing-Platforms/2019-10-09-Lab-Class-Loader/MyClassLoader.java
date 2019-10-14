@@ -36,11 +36,11 @@ public class MyClassLoader {
 
       if (loadedClass instanceof Class) {
         System.out.println("Object is a Class");
-        Class classIntrospection = (Class) loadedClass;
+        Class<?> classIntrospection = (Class<?>) loadedClass;
 
         System.out.println("Class name: " + classIntrospection.getName());
 
-        for (Class interfaceClass : classIntrospection.getInterfaces()) {
+        for (Class<?> interfaceClass : classIntrospection.getInterfaces()) {
           System.out.println("Implements: " + interfaceClass.getName());
         }
 
