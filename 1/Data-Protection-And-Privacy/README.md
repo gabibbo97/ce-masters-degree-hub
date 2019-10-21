@@ -2,4 +2,8 @@
 
 ## Lessons
 
-* [10 October 2019 - K-anonymity with datafly in Python](2019-10-10-K-Anonymity-Datafly/README.md)
+- [10 October 2019 - K-anonymity with datafly in Python](2019-10-10-K-Anonymity-Datafly/README.md)
+
+## Additional material
+
+- [17 October 2019 - Question on similarity attack](2019-10-17-Question-On-Similarity-Attack/README.md)
