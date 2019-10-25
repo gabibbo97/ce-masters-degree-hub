@@ -9,27 +9,31 @@ import os
 
 
 
-def greedy_rec_algorithm():
+def greedy_rec_algorithm(graph_degrees):
     # complete this function
+
+    pass
     do_stuff()
 
 def dp_graph_anonymization():
     # complete this function
+    pass
     do_stuff()
 
 
-def construct_graph(vertex_degree):  
+def construct_graph(vertex_degree):
     # complete this function
-    do_stuff()                    
+    pass
+    do_stuff()
 
 if __name__ == "__main__":
 
-    
+
     k_degree = int(sys.argv[1])
     file_graph = sys.argv[2]
     G = nx.Graph()
-    
-    if os.path.exists(file_graph): 
+
+    if os.path.exists(file_graph):
         # if file exist
         with open(file_graph) as f:
             content = f.readlines()
@@ -55,7 +59,7 @@ if __name__ == "__main__":
     print("Array of degrees sorted (array_degrees) : {}".format(array_degrees))
 
     # greedy
-    vertex_degree_greedy = greedy_rec_algorithm()
+    vertex_degree_greedy = greedy_rec_algorithm(array_degrees)
 
     # dp
     vertex_degree_dp = graph_dp()
@@ -65,4 +69,3 @@ if __name__ == "__main__":
 
     # construct graph
     graph_dp = construct_graph(vertex_degree_dp)
-    
