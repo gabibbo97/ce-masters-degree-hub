@@ -15,7 +15,7 @@
 ]{geometry}
 
 \title{Primo report}
-\author{Giacomo Longo e Roberta Tassara}
+\author{Giacomo Longo (4336477) e Roberta Tassara (4336488)}
 \date{14 Novembre 2019}
 
 \begin{document}
@@ -133,6 +133,7 @@ ció é dovuto al rumore. \\
 \subsection{Codice}
 \lstinputlisting[basicstyle=\tiny ,language=MATLAB]{regressione.m}
 
+\newpage
 \section{Analisi di regressione in presenza del regolarizzatore}
 
 \subsection{Introduzione}
@@ -205,5 +206,50 @@ attraversa esattamente tutti i punti utilizzati per la sua costruzione.
 \newpage
 \subsection{Codice}
 \lstinputlisting[basicstyle=\tiny ,language=MATLAB]{regressione_lambda.m}
+
+\newpage
+\section{Analisi di Monte Carlo dei due approcci}
+
+\subsection{Parametri}
+
+Numero di trials: $1000$
+
+\subsection{Regressione}
+
+\begin{verbatim}
+p = 0, error = 2.66e-01
+p = 1, error = 7.90e-02
+p = 2, error = 5.64e-02
+p = 3, error = 9.54e-02
+p = 4, error = 2.27e-01
+p = 5, error = 1.10e+00
+p = 6, error = 9.00e+00
+p = 7, error = 1.37e+02
+p = 8, error = 2.96e+03
+\end{verbatim}
+
+\subsubsection{Codice}
+\lstinputlisting[basicstyle=\tiny ,language=MATLAB]{regressione_mc.m}
+
+\newpage
+\subsection{Regressione con regolarizzatore}
+
+\begin{verbatim}
+lambda = 0.00e+00, error = 1.00e+04
+lambda = 1.00e-03, error = 3.69e-02
+lambda = 1.00e-02, error = 2.94e-02
+lambda = 3.16e-02, error = 2.80e-02
+lambda = 1.00e-01, error = 3.11e-02
+lambda = 3.16e-01, error = 4.39e-02
+lambda = 1.00e+00, error = 6.99e-02
+lambda = 3.16e+00, error = 1.11e-01
+lambda = 1.00e+01, error = 1.65e-01
+\end{verbatim}
+Come precedentemente indicato, l'errore maggiore si commette per
+$\lambda=0$. \\
+Con la crescita di $\lambda$, dopo una certa soglia, l'errore incrementa monotonicamente.
+
+\subsubsection{Codice}
+\lstinputlisting[basicstyle=\tiny ,language=MATLAB]{regressione_lambda_mc.m}
 
 \end{document}
