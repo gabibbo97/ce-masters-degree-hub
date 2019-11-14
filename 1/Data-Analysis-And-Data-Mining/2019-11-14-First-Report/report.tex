@@ -60,7 +60,7 @@ che corrisponde al minimo globale
 \subsubsection{Parametri di simulazione}
 Dimensione dell'asse delle x: $10000$ punti \\
 Intervallo dell'asse delle x: $0 \leq x \leq 1$ \\
-Punti campione: $10$ \\
+Punti campione: $9$ \\
 Intensitá di rumore: $10\%$
 
 \subsubsection{$p>n-1$}
@@ -82,7 +82,7 @@ la funzione stimata si comporta in modo molto differente con vistose oscillazion
 
 Per bassi valori di p, la funzione risultante é semplice. \\
 Tra i vari valori di p, in questa particolare istanza,
-il valore che approssima meglio la funzione originale é $p=3$
+il valore che approssima meglio la funzione originale é $p=4$
 per il quale si ha il piú basso errore medio. \\
 Questo significa che per questa funzione,
 l'errore di approssimazione é inferiore a quello di stima. \\
@@ -92,45 +92,118 @@ ció é dovuto al rumore. \\
 \begin{figure}[H]
   \centering
   \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/regression/p_eq_0.png}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=\textwidth]{plots/regression/p_eq_1.png}
   \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
   \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=\textwidth]{plots/regression/p_eq_2.png}
   \end{subfigure}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
   \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=\textwidth]{plots/regression/p_eq_3.png}
   \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
   \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=\textwidth]{plots/regression/p_eq_4.png}
   \end{subfigure}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
   \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=\textwidth]{plots/regression/p_eq_5.png}
   \end{subfigure}
-  \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\textwidth]{plots/regression/p_eq_6.png}
-  \end{subfigure}
 \end{figure}
 
 \begin{figure}[H]
   \centering
   \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\textwidth]{plots/regression/p_eq_7.png}
+    \includegraphics[width=\textwidth]{plots/regression/p_eq_6.png}
   \end{subfigure}
   \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\textwidth]{plots/regression/p_eq_8.png}
+    \includegraphics[width=\textwidth]{plots/regression/p_eq_7.png}
   \end{subfigure}
 \end{figure}
 
 \newpage
 \subsection{Codice}
 \lstinputlisting[basicstyle=\tiny ,language=MATLAB]{regressione.m}
+
+\section{Analisi di regressione in presenza del regolarizzatore}
+
+\subsection{Introduzione}
+
+Per questa analisi si introduce un nuovo parametro $\lambda$ detto \textit{regolarizzatore} \\
+La funzione da minimizzare diviene
+
+$$
+  \underset{\underline{c}}{\min} \mid \mid X \underline{c} - \underline{y} \mid \mid^2 + \lambda \mid \mid \underline{c} \mid \mid^2
+$$
+Portando il calcolo di $ \underline{c} $ a:
+$$
+  \underline{c} = (X^T X + \lambda I)^+ X \underline{y}
+$$
+Il valore introdotto ha la funzione equivalente a un filtro low pass:
+i termini di grado piú alto vengono smorzati, "ammorbidendo" la funzione risultante. \\
+$\lambda \mid \mid \underline{c} \mid \mid$ rappresenta circa il numero di funzioni all'interno dello spazio delle ipotesi \\
+e affinché questo valore sia convesso, viene elevato al quadrato.
+
+\subsection{Parametri di simulazione}
+
+Dimensione dell'asse delle x: $10000$ punti \\
+Intervallo dell'asse delle x: $0 \leq x \leq 1$ \\
+Punti campione: $10$ \\
+Intensitá di rumore: $10\%$
+
+\subsection{Analisi al variare di $\lambda$}
+
+Per valori piccoli di $\lambda$ si ha overfit (in zero si ha che la funzione attraversa esattamente tutti i punti campionati). \\
+Con il crescere di $\lambda$, la struttura della funzione ricostruita si semplifica (i coefficienti associati ai termini piú alti in grado risultano smorzati). \\
+Per valori di $\lambda$ troppo elevati, la funzione diverge dai dati, tendendo a "appiattirsi".
+
+Il valore di $\lambda$ che fornisce il minor errore rispetto alla funzione reale nel caso
+considerato é $\lambda=1*10^{-2}$. \\
+Non é possibile trarre una legge generale che associ l'errore medio al variare di $\lambda$.
+Per quanto riguarda l'errore medio rispetto ai campioni, valori di lambda inferiori sono associati
+a una maggiore vicinanza ai punti campionati, infatti per il caso limite $\lambda=0$ si ha una funzione che
+attraversa esattamente tutti i punti utilizzati per la sua costruzione.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/regression_lambda/lambda_eq_0.png}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/regression_lambda/lambda_eq_10-3.png}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/regression_lambda/lambda_eq_10-2.png}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/regression_lambda/lambda_eq_10-1.png}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/regression_lambda/lambda_eq_1.png}
+  \end{subfigure}
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/regression_lambda/lambda_eq_10.png}
+  \end{subfigure}
+\end{figure}
+
+\newpage
+\subsection{Codice}
+\lstinputlisting[basicstyle=\tiny ,language=MATLAB]{regressione_lambda.m}
 
 \end{document}

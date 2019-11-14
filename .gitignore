@@ -1,3 +1,7 @@
 .vscode
+**/*.aux
 **/*.class
+**/*.fdb_latexmk
+**/*.fls
+**/*.log
 **/*.synctex.gz
