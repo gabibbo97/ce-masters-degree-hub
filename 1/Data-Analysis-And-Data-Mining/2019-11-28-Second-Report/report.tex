@@ -59,13 +59,13 @@ $$
 $$
 La complessità di questo approccio è $O(n^2)$ ove $n$ è il numero di sample.
 Di conseguenza è raccomandato per quando i dati hanno molta cardinalità ma poche colonne.
-
 \subsubsection{Analisi dell'approccio}
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/LinearRegressionLine}
 \end{figure}
-In questo esempio il regressore lineare puó generare una buona approssimazione della funzione originale.
+In questo esempio il regressore lineare puó generare una buona approssimazione della funzione originale. \\
+Come previsto dalla teoria sopra accennata, l'approccio primale (linea rossa) e quello duale (linea verde) sono equivalenti.
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/LinearRegressionSine}
@@ -75,7 +75,6 @@ che approssimi correttamente.
 
 \newpage
 \subsection{Approccio a kernel}
-
 L'approccio a kernel consiste nello sfruttamento di particolari funzioni, dette \textit{kernel}
 capaci di generare uno spazio vettoriale di dimensione sufficiente a rappresentare anche funzioni non lineari. \\
 La funzione frutto del processo ha la forma
@@ -86,7 +85,6 @@ $$
 $$
   K_{x_i}(x) = K(x_i, x) = \exp - \gamma || x_i - x ||^2
 $$
-
 \subsubsection{Analisi dell'approccio}
 Considerando una funzione lineare, analizziamo il risultato della variazione
 del parametro $\gamma$
@@ -103,7 +101,9 @@ A sinistra viene utilizzato $\gamma = 1$, a destra viene utilizzato $\gamma = 0.
 Possiamo notare che per $\gamma$ maggiore, la funzione ha al suo interno piú componenti
 non lineari (ad alta frequenza) che si mostrano come vibrazioni rispetto alla linea. \\
 Diminuendo il parametro si ottiene una funzione piú "pulita", seppur si evidenzino le non linearitá presenti
-agli estremi dell'intervallo considerato.
+agli estremi dell'intervallo considerato. \\
+Avremmo potuto agire anche sul parametro $\lambda$, il cui effetto é duale rispetto a $\gamma$:
+a valori di $\lambda$ elevati si associano funzioni piú semplici (vedere primo report per analisi dettagliata).
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/KernelRegressionSine}
@@ -113,7 +113,6 @@ ottenere un'approssimazione valida anche nel caso non lineare.
 
 \newpage
 \section{Classificatore a due classi}
-
 Desideriamo dividere i nostri sample in due classi $\{+1,-1\}$. \\
 A differenza del caso precedente, non ci interessa piú sapere la distanza
 della nostra funzione dai sample reali ma solo se un oggetto é stato classificato
@@ -134,7 +133,6 @@ La minimizzazione della square loss quindi ha due effetti:
   \item Minimizzazione della distanza della loss function rispetto al punto $x=1$ (per il punto 3) $\rightarrow$ effetto secondario
 \end{itemize}
 Di conseguenza la square loss rappresenta una buona approssimazione anche per risolvere questo problema.
-
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/LinearBinaryClassifier}
@@ -175,14 +173,26 @@ punti presenti nelle zone deformate.
 
 \newpage
 \section{Classificatore multiclasse A.V.A.}
-
 Per classificare in piú classi, utilizziamo la tecnica ALL VS ALL, esiste anche un'altra tecnica, la ONE VS ALL che non tratteremo in questa relazione. \\
-La tecnica AVA consiste nel trasformare il problema in uno o piú problemi di binary classification in modo da riutilizzare la conoscenza acquisita precedentemente. \\
+La tecnica AVA consiste nel trasformare il problema in uno o piú problemi di binary classification in modo da riutilizzare la conoscenza acquisita precedentemente.
 $$
   n_p = {c \choose 2} \qquad n_p = \text{numero di problemi} \qquad c = \text{numero di classi}
 $$
 La classificazione di un punto consiste nell'utilizzare tutti i classificatori in sequenza e successivamente
 decidere l'appartenenza del punto sulla base di una votazione a maggioranza di tutti i sottoclassificatori.
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\textwidth]{images/Multiclass_linear}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\textwidth]{images/Multiclass_linear_fails}
+  \end{subfigure}
+\end{figure}
+Nel caso di cluster di punti separabili linearmente (immagine a sinistra), l'approccio lineare permette
+la loro corretta classificazione. \\
+Nel caso presentato a destra, invece, il classificatore lineare non riesce a separare correttamente i cluster,
+non potendo dividere i cluster posizionati lungo lo stesso raggio.
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/KernelAVA}
