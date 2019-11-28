@@ -143,7 +143,13 @@ Utilizzando una funzione lineare, possiamo tracciare una retta
 che divide due classi di punti bilanciati rispetto a tale asse. \\
 Come nel caso della regressione lineare, nel caso i punti fossero non bilanciati
 rispetto all'origine, si sarebbe dovuto introdurre un termine di bias.
-\newpage
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{images/LinearBinaryClassifier2}
+\end{figure}
+Anche nel caso in cui i due gruppi di sample siano parzialmente coincidenti,
+la funzione ottenuta sbaglia a assegnare la classe ai punti che si trovano piú vicini
+rispetto al centro dell'altro cluster.
 \begin{figure}[H]
   \centering
   \begin{subfigure}{0.30\textwidth}
